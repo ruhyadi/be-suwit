@@ -16,3 +16,4 @@ networks:
   be-suwit-network:
     name: be-suwit-network
     driver: bridge
+    external: true
