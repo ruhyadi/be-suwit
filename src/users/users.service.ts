@@ -4,6 +4,7 @@ import { DeleteResult, Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -15,7 +16,7 @@ export class UsersService {
   create(createUserDto: CreateUserDto) {
     const user = new User();
     user.username = createUserDto.username;
-    user.password = createUserDto.password;
+    user.password = bcrypt.hashSync(createUserDto.password, 10);
     return this.usersRepository.save(user);
   }
 
