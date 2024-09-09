@@ -1,0 +1,30 @@
+{
+    "name": "be-suwit-devel",
+    "remoteUser": "node",
+    "privileged": false,
+    "image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bookworm",
+    "workspaceFolder": "/workspace",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+    "containerEnv": {
+        "TZ": "Asia/Jakarta"
+    },
+    "runArgs": [
+        "--network=be-suwit-network"
+    ],
+    "features": {
+        "ghcr.io/devcontainers/features/docker-outside-of-docker": {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.vscode-typescript-next",
+                "esbenp.prettier-vscode",
+                "dbaeumer.vscode-eslint",
+                "ms-vscode.makefile-tools",
+                "eamodio.gitlens",
+                "redhat.vscode-yaml",
+                "yzhang.markdown-all-in-one"
+            ]
+        }
+    }
+}
