@@ -1,0 +1,20 @@
+services:
+  be-suwit:
+    container_name: be-suwit
+    image: node:20-alpine
+    restart: always
+    env_file: .env
+    ports:
+      - ${PORT:-6191}:${PORT:-6191}
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: sh -c "if [ -d node_modules ]; then echo 'node_modules exists'; else echo 'node_modules not exists'; npm install; fi && npm run start"
+    networks:
+      - be-suwit-network
+
+networks:
+  be-suwit-network:
+    name: be-suwit-network
+    driver: bridge
+    external: true
