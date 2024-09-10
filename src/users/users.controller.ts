@@ -9,8 +9,13 @@ export class UsersController {
 
   @Post()
   @Version('1')
-  async create(): Promise<any> {
-    return "create"
+  async create(@Body() createUserDto: CreateUserDto): Promise<any> {
+    const user = await this.usersService.create(createUserDto);
+
+    return {
+      id: user.id,
+      username: user.username,
+    };
 
   }
 
