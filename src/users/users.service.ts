@@ -1,10 +1,13 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
-import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -40,7 +43,7 @@ export class UsersService {
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
-    // check if the user exists first
+    // check if the user exists
     const user = await this.usersRepository.findOneBy({ id });
     if (!user) {
       throw new NotFoundException(`User with id ${id} not found`);
@@ -48,9 +51,23 @@ export class UsersService {
 
     // Update the user's data
     user.username = updateUserDto.username;
-    user.password = bcrypt.hashSync(updateUserDto.password, 10);
+    user.password = updateUserDto.password;
 
     return await this.usersRepository.save(user);
   }
 
+  async remove(id: number) {
+    // check if the user exists
+    const user = await this.usersRepository.findOneBy({ id });
+    if (!user) {
+      throw new NotFoundException(`User with id ${id} not found`);
+    }
+
+    // delete user
+    const result = await this.usersRepository.delete(id);
+
+    if (result.affected === 0) {
+      throw new NotFoundException(`User with id ${id} not found`);
+    }
+  }
 }
