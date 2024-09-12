@@ -14,5 +14,6 @@ export class AuthController {
   async login(@Request() req) {
     console.log('req', req);
     return req.user;
+    return this.authService.login(req.user);
   }
 }
