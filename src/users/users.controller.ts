@@ -15,9 +15,8 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ReadUserDto } from './dto/read-user.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-
 @UseGuards(JwtAuthGuard)
-@ApiBearerAuth()
+@ApiBearerAuth('oauth2')
 @ApiTags('users')
 @Controller('users')
 export class UsersController {

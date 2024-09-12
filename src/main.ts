@@ -18,10 +18,15 @@ async function bootstrap() {
     .setTitle('Suwit REST API')
     .setDescription('The suwit API documentation')
     .setVersion('1.0')
-    .addBearerAuth(
-      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
-      'access-token',
-    )
+    .addOAuth2({
+      type: 'oauth2',
+      flows: {
+        password: {
+          tokenUrl: `http://${process.env.DOMAIN}:${process.env.PORT}/api/v1/auth/login`,
+          scopes: {},
+        },
+      },
+    })
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
