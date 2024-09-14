@@ -1,13 +1,13 @@
 import {
-  ConflictException,
   Injectable,
   NotFoundException,
+  ConflictException,
 } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './entities/user.entity';
-import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -44,21 +44,21 @@ export class UsersService {
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
-    // check if the user exists
+    // check if user exists
     const user = await this.usersRepository.findOneBy({ id });
     if (!user) {
       throw new NotFoundException(`User with id ${id} not found`);
     }
 
-    // Update the user's data
+    // update user data
     user.username = updateUserDto.username;
-    user.password = updateUserDto.password;
+    user.password = bcrypt.hashSync(updateUserDto.password, 10);
 
     return await this.usersRepository.save(user);
   }
 
   async remove(id: number) {
-    // check if the user exists
+    // check if user exists
     const user = await this.usersRepository.findOneBy({ id });
     if (!user) {
       throw new NotFoundException(`User with id ${id} not found`);

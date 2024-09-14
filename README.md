@@ -33,7 +33,7 @@ docker network create be-suwit-network
 make start_db
 ```
 
-4. Open project in devcontainer
+4. Open in the devcontainer
 
 ```bash
 # Press F1 and select Remote-Containers: Reopen in Container
