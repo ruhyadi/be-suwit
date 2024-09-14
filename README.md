@@ -57,6 +57,8 @@ cp .env.example .env
 npm run start:dev
 ```
 
+The server will be running on `{DOMAIN}:{PORT}` (ex. `http://localhost:3000`) and the Swagger documentation will be available at `{DOMAIN}:{PORT}/api/docs` (ex. `http://localhost:3000/api/docs`).
+
 ## Acknowledgements
 
 - [NestJS](https://nestjs.com/): A progressive Node.js framework for building efficient, reliable, and scalable server-side applications.
