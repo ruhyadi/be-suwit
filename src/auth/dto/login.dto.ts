@@ -7,3 +7,8 @@ export class LoginDto {
   @ApiProperty({ example: 'password', description: 'The password of the User' })
   password: string;
 }
+
+export class LoginResponseDto {
+  @ApiProperty({ example: 'eyJhbGcixx', description: 'The JWT access token' })
+  access_token: string;
+}

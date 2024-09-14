@@ -33,7 +33,7 @@ docker network create be-suwit-network
 make start_db
 ```
 
-4. Open project in devcontainer
+4. Open in the devcontainer
 
 ```bash
 # Press F1 and select Remote-Containers: Reopen in Container
@@ -56,6 +56,8 @@ cp .env.example .env
 ```bash
 npm run start:dev
 ```
+
+The server will be running on `{DOMAIN}:{PORT}` (ex. `http://localhost:3000`) and the Swagger documentation will be available at `{DOMAIN}:{PORT}/api/docs` (ex. `http://localhost:3000/api/docs`).
 
 ## Acknowledgements
 
